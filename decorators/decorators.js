@@ -47,4 +47,30 @@ function imprimivel(constructor) {
 // (<any>new Eletrodomestico()).imprimir() <- Ruim, perde validações por conta do Any
 const eletro = new Eletrodomestico();
 eletro.imprimir && eletro.imprimir(); // Verifica se existe e chama imprimir
+// Desafio Decorator perfilAdmin
+const usuarioLogado = {
+    nome: 'Guilherme Filho',
+    email: 'guigui@gmail.com',
+    admin: false
+};
+let MudancaAdministrativa = class MudancaAdministrativa {
+    critico() {
+        console.log('Algo crítico foi alterado!');
+    }
+};
+MudancaAdministrativa = __decorate([
+    perfilAdmin
+], MudancaAdministrativa);
+// type Constructor = { new(...args: any[]): {} }
+function perfilAdmin(constructor) {
+    return class extends constructor {
+        constructor(...args) {
+            super(...args);
+            if (!usuarioLogado || !usuarioLogado.admin) {
+                throw Error('Sem permissões');
+            }
+        }
+    };
+}
+new MudancaAdministrativa().critico();
 //# sourceMappingURL=decorators.js.map
