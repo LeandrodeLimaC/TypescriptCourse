@@ -87,13 +87,16 @@ function perfilAdmin<T extends Constructor>(constructor: T) {
 // new MudancaAdministrativa().critico()
 
 class ContaCorrente {
+    @naoNegativo
     private saldo: number
+
     constructor(saldo: number) {
         this.saldo = saldo
     }
 
     @congelar
     sacar(valor: number): Boolean {
+        console.log('Tentando sacar ' + valor)
         if (valor <= this.saldo) {
             this.saldo -= valor
             return true
@@ -111,12 +114,15 @@ class ContaCorrente {
 const cc = new ContaCorrente(10000.57)
 
 cc.sacar(5000)
+cc.sacar(5000.57)
+console.log(cc.getSaldo())
+cc.sacar(5000.57)
 console.log(cc.getSaldo())
 
+// Tentativa maliciosa de alterar metodo
 // cc.getSaldo = function () {
 //     return this['saldo'] + 7000
 // }
-
 // console.log(cc.getSaldo())
 
 function congelar(
@@ -124,7 +130,24 @@ function congelar(
     nomeMetodo: string,
     descritor: PropertyDescriptor
 ) {
-    console.log(alvo)
-    console.log(nomeMetodo)
+    console.log('alvo', alvo)
+    console.log('nomeMetodo:', nomeMetodo)
     descritor.writable = false
+}
+
+function naoNegativo(alvo: any, nomePropriedade: string) {
+    delete alvo[nomePropriedade]
+
+    Object.defineProperty(alvo, nomePropriedade, {
+        get(): number {
+            return alvo["_" + nomePropriedade]
+        },
+
+        set(valor: number): void {
+            if (valor < 0)
+                throw new Error('Saldo Inválido')
+
+            alvo["_" + nomePropriedade] = valor
+        }
+    })
 }

@@ -78,6 +78,7 @@ class ContaCorrente {
         this.saldo = saldo;
     }
     sacar(valor) {
+        console.log('Tentando sacar ' + valor);
         if (valor <= this.saldo) {
             this.saldo -= valor;
             return true;
@@ -89,6 +90,9 @@ class ContaCorrente {
     }
 }
 __decorate([
+    naoNegativo
+], ContaCorrente.prototype, "saldo", void 0);
+__decorate([
     congelar
 ], ContaCorrente.prototype, "sacar", null);
 __decorate([
@@ -96,14 +100,31 @@ __decorate([
 ], ContaCorrente.prototype, "getSaldo", null);
 const cc = new ContaCorrente(10000.57);
 cc.sacar(5000);
+cc.sacar(5000.57);
 console.log(cc.getSaldo());
+cc.sacar(5000.57);
+console.log(cc.getSaldo());
+// Tentativa maliciosa de alterar metodo
 // cc.getSaldo = function () {
 //     return this['saldo'] + 7000
 // }
 // console.log(cc.getSaldo())
 function congelar(alvo, nomeMetodo, descritor) {
-    console.log(alvo);
-    console.log(nomeMetodo);
+    console.log('alvo', alvo);
+    console.log('nomeMetodo:', nomeMetodo);
     descritor.writable = false;
+}
+function naoNegativo(alvo, nomePropriedade) {
+    delete alvo[nomePropriedade];
+    Object.defineProperty(alvo, nomePropriedade, {
+        get() {
+            return alvo["_" + nomePropriedade];
+        },
+        set(valor) {
+            if (valor < 0)
+                throw new Error('Saldo Inválido');
+            alvo["_" + nomePropriedade] = valor;
+        }
+    });
 }
 //# sourceMappingURL=decorators.js.map
