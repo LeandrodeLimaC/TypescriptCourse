@@ -95,7 +95,7 @@ class ContaCorrente {
     }
 
     @congelar
-    sacar(valor: number): Boolean {
+    sacar(@paramInfo valor: number): Boolean {
         console.log('Tentando sacar ' + valor)
         if (valor <= this.saldo) {
             this.saldo -= valor
@@ -150,4 +150,10 @@ function naoNegativo(alvo: any, nomePropriedade: string) {
             alvo["_" + nomePropriedade] = valor
         }
     })
+}
+
+function paramInfo(alvo: any, nomeMetodo: string, indiceParam: number) {
+    console.log('O Alvo é', alvo)
+    console.log(`O nome do método é: ${nomeMetodo}`)
+    console.log(`O indice do parametro é: ${indiceParam}`)
 }
