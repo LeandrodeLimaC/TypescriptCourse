@@ -17,17 +17,6 @@ function decorator(obj) {
         console.log(obj.a + ' ' + obj.b);
     };
 }
-// @logarClasse
-// @logarClasseSe(false)
-// @decorator({ a: 'Teste', b: 123 })
-let Eletrodomestico = class Eletrodomestico {
-    constructor() {
-        console.log('Novo...');
-    }
-};
-Eletrodomestico = __decorate([
-    logarObjeto
-], Eletrodomestico);
 function logarObjeto(construtor) {
     console.log("Carregado...");
     return class extends construtor {
@@ -38,6 +27,24 @@ function logarObjeto(construtor) {
         }
     };
 }
-new Eletrodomestico();
-new Eletrodomestico();
+// @logarClasse
+// @logarClasseSe(false)
+// @decorator({ a: 'Teste', b: 123 })
+// @logarObjeto
+let Eletrodomestico = class Eletrodomestico {
+    constructor() {
+        console.log('Novo...');
+    }
+};
+Eletrodomestico = __decorate([
+    imprimivel
+], Eletrodomestico);
+function imprimivel(constructor) {
+    constructor.prototype.imprimir = function () {
+        console.log(this);
+    };
+}
+// (<any>new Eletrodomestico()).imprimir() <- Ruim, perde validações por conta do Any
+const eletro = new Eletrodomestico();
+eletro.imprimir && eletro.imprimir(); // Verifica se existe e chama imprimir
 //# sourceMappingURL=decorators.js.map

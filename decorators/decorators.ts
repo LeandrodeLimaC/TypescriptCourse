@@ -14,16 +14,6 @@ function decorator(obj: { a: string, b?: number }) {
     }
 }
 
-// @logarClasse
-// @logarClasseSe(false)
-// @decorator({ a: 'Teste', b: 123 })
-@logarObjeto
-class Eletrodomestico {
-    constructor() {
-        console.log('Novo...')
-    }
-}
-
 type Constructor = { new(...args: any[]): {} }
 
 function logarObjeto(construtor: Constructor) {
@@ -37,5 +27,31 @@ function logarObjeto(construtor: Constructor) {
     }
 }
 
-new Eletrodomestico()
-new Eletrodomestico()
+// new Eletrodomestico()
+// new Eletrodomestico()
+
+interface Eletrodomestico {
+    imprimir?(): void
+}
+
+// @logarClasse
+// @logarClasseSe(false)
+// @decorator({ a: 'Teste', b: 123 })
+// @logarObjeto
+@imprimivel
+class Eletrodomestico {
+    constructor() {
+        console.log('Novo...')
+    }
+}
+
+function imprimivel(constructor: Function) {
+    constructor.prototype.imprimir = function () {
+        console.log(this)
+    }
+}
+
+// (<any>new Eletrodomestico()).imprimir() <- Ruim, perde validações por conta do Any
+
+const eletro = new Eletrodomestico()
+eletro.imprimir && eletro.imprimir() // Verifica se existe e chama imprimir
