@@ -125,4 +125,56 @@ console.log(fila.proximo());
 console.log(fila.proximo());
 console.log(fila.proximo());
 fila.imprimir();
+const novaFila = new Fila(1, 2);
+// class Mapa<C, V> {
+//     private itens: Array<Par<C, V>> = new Array<Par<C, V>>()
+//     constructor() { }
+//     obter(chave: C): Par<C, V> | null {
+//         const resultado = this.itens.find((element) => element.chave === chave) || null
+//         return resultado
+//     }
+//     colocar(item: Par<C, V>): void {
+//         const t = this.itens.findIndex(element => element.chave === item.chave)
+//         if (t === -1)
+//             this.itens.push(item)
+//         this.itens.splice(t, 1, item)
+//     }
+//     limpar(): void {
+//         this.itens = []
+//     }
+//     imprimir() {
+//         console.log(this.itens)
+//     }
+// }
+class Mapa {
+    constructor() {
+        this.itens = new Array();
+    }
+    obter(chave) {
+        const resultado = this.itens.filter((element) => element.chave === chave);
+        return resultado ? resultado[0] : null;
+    }
+    colocar(par) {
+        const encontrado = this.obter(par.chave);
+        if (encontrado)
+            encontrado.valor = par.valor;
+        else
+            this.itens.push(par);
+    }
+    limpar() {
+        this.itens = new Array();
+    }
+    imprimir() {
+        console.log(this.itens);
+    }
+}
+const mapa = new Mapa();
+mapa.colocar({ chave: 1, valor: 'Pedro' });
+mapa.colocar({ chave: 2, valor: 'Rebeca' });
+mapa.colocar({ chave: 3, valor: 'Maria' });
+mapa.colocar({ chave: 1, valor: 'Gustavo' });
+console.log(mapa.obter(2));
+mapa.imprimir();
+mapa.limpar();
+mapa.imprimir();
 //# sourceMappingURL=generics.js.map

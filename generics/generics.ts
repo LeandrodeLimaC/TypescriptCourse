@@ -129,7 +129,7 @@ console.log(new DiferencaEntreDatas(d1, d2).executar())
 //         console.log(this.fila)
 //     }
 // }
-class Fila<T> {
+class Fila<T extends number | string> {
     private fila: Array<T>
 
     constructor(...args: T[]) {
@@ -163,3 +163,77 @@ console.log(fila.proximo())
 console.log(fila.proximo())
 fila.imprimir()
 
+const novaFila = new Fila<number>(1, 2)
+
+// Desafio Mapa
+// Array de Objetos (Chave/Valor) -> itens
+// Métodos: obter(Chave), colocar({ C, V })
+// limpar(), imprimir()
+
+
+type Par<C, V> = { chave: C, valor: V }
+// class Mapa<C, V> {
+//     private itens: Array<Par<C, V>> = new Array<Par<C, V>>()
+
+//     constructor() { }
+
+//     obter(chave: C): Par<C, V> | null {
+//         const resultado = this.itens.find((element) => element.chave === chave) || null
+//         return resultado
+//     }
+
+//     colocar(item: Par<C, V>): void {
+//         const t = this.itens.findIndex(element => element.chave === item.chave)
+//         if (t === -1)
+//             this.itens.push(item)
+
+//         this.itens.splice(t, 1, item)
+//     }
+
+//     limpar(): void {
+//         this.itens = []
+//     }
+
+//     imprimir() {
+//         console.log(this.itens)
+//     }
+// }
+
+class Mapa<C, V> {
+    private itens: Array<Par<C, V>> = new Array<Par<C, V>>()
+
+    constructor() { }
+
+    obter(chave: C): Par<C, V> | null {
+        const resultado = this.itens.filter((element) => element.chave === chave)
+        return resultado ? resultado[0] : null
+    }
+
+    colocar(par: Par<C, V>): void {
+        const encontrado = this.obter(par.chave)
+
+        if (encontrado)
+            encontrado.valor = par.valor;
+        else
+            this.itens.push(par)
+    }
+
+    limpar(): void {
+        this.itens = new Array<Par<C, V>>()
+    }
+
+    imprimir(): void {
+        console.log(this.itens)
+    }
+}
+
+const mapa = new Mapa<number, string>()
+mapa.colocar({ chave: 1, valor: 'Pedro' })
+mapa.colocar({ chave: 2, valor: 'Rebeca' })
+mapa.colocar({ chave: 3, valor: 'Maria' })
+mapa.colocar({ chave: 1, valor: 'Gustavo' })
+
+console.log(mapa.obter(2))
+mapa.imprimir()
+mapa.limpar()
+mapa.imprimir()
