@@ -52,8 +52,8 @@ Ainda não foi emitido o certificado por tratar de um curso que ainda está send
 - [x] Seção 8: Generics
 - [x] Seção 9: Decorators
 - [x] Seção 10: Usando Bibliotecas JS com Typescript
-- [ ] Seção 11: Integração TypeScrip + Gulp
-- [ ] Seção 12: Integração TypeScrip + Webpack
+- [x] Seção 11: Integração TypeScrip + Gulp
+- [x] Seção 12: Integração TypeScrip + Webpack
 - [ ] Seção 13: Integração TypeScrip + React
 - [ ] Seção 14: Integração TypeScrip + VueJs
 - [ ] Seção 15: Conclusão
