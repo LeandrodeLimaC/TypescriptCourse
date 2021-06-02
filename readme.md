@@ -39,7 +39,7 @@ npm run start
 Certificado
 ---
 
-Ainda não foi emitido o certificado por tratar de um curso que ainda está sendo realizado
+![Certificado do curso de TypeScript realizado na Udemy com assinaturas dos instrutores](certificado.jpg "Certificado do curso")
 #### Progresso
 
 - [x] Seção 1: Introdução
@@ -52,8 +52,8 @@ Ainda não foi emitido o certificado por tratar de um curso que ainda está send
 - [x] Seção 8: Generics
 - [x] Seção 9: Decorators
 - [x] Seção 10: Usando Bibliotecas JS com Typescript
-- [x] Seção 11: Integração TypeScrip + Gulp
-- [x] Seção 12: Integração TypeScrip + Webpack
-- [ ] Seção 13: Integração TypeScrip + React
-- [ ] Seção 14: Integração TypeScrip + VueJs
-- [ ] Seção 15: Conclusão
+- [x] Seção 11: Integração TypeScrip + Gulp (Presente em repositório privado)
+- [x] Seção 12: Integração TypeScrip + Webpack (Presente em repositório privado)
+- [x] Seção 13: Integração TypeScrip + React (Presente em repositório privado)
+- [x] Seção 14: Integração TypeScrip + VueJs (Presente em repositório privado)
+- [x] Seção 15: Conclusão
